@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "hn_43337754",
+    "title": "Fragmented vulnerability tracking across pen tests and scanners",
+    "description": "Security teams struggle to consolidate and standardize vulnerability data coming from disparate penetration tests and security scanners. Without a unified dashboard, managing remediation workflows and maintaining asset visibility across an organization becomes fragmented and overwhelming.",
+    "audience": "DevSecOps Engineers, Cybersecurity Analysts, and CISOs",
+    "category": "Developer Tools",
+    "difficulty": "Medium",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=43337754",
+    "upvotes": 3,
+    "comments": 2
+  },
+  {
+    "id": "hn_13907624",
+    "title": "Lack of control over ad selection and formats in mobile apps",
+    "description": "Mobile app developers using traditional programmatic ad networks face limited control over which ads appear, their visual formats, and exact display timing. This lack of fine-grained control can lead to poor user experience, irrelevant ad content, and lower monetization efficiency. Developers need solutions that enable direct ad selling and granular placement control.",
+    "audience": "Mobile App Developers and Publishers",
+    "category": "Developer Tools",
+    "difficulty": "Hard",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=13907624",
+    "upvotes": 242,
+    "comments": 106
+  },
+  {
+    "id": "hn_43936426",
+    "title": "Lack of privacy and transparency in mobile ad networks",
+    "description": "Mobile app developers struggle with existing ad networks like AdMob and Unity Ads due to bloated SDKs, poor UX control, and privacy concerns. Unclear pricing models and low payout transparency further frustrate developers seeking fair monetization without compromising user experience.",
+    "audience": "Mobile App Developers",
+    "category": "Developer Tools",
+    "difficulty": "Hard",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=43936426",
+    "upvotes": 1,
+    "comments": 0
+  },
+  {
+    "id": "hn_9277945",
+    "title": "Enforcing consistent coding standards across development teams",
+    "description": "Ensuring every developer on a team adheres to the same coding guidelines and style rules is difficult and time-consuming. While linter tools exist, maintaining configuration consistency and seamlessly enforcing standards across multiple projects remains challenging.",
+    "audience": "Software Developers, Engineering Managers, Tech Leads",
+    "category": "Developer Tools",
+    "difficulty": "Medium",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=9277945",
+    "upvotes": 15,
+    "comments": 21
+  }
+]
