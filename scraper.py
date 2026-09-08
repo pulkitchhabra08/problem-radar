@@ -1,84 +1,76 @@
 import json
 import os
-import re
 import urllib.request
 import urllib.error
 
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 ProblemRadar/1.0"
+USER_AGENT = "ProblemRadar/1.0 (free open-source scraper; contact@problemradar.dev)"
 
-SUBREDDITS = ["SaaS", "startups", "entrepreneur", "smallbusiness", "webdev", "sideproject"]
-
-# Broader keywords to capture complaints and feature gaps
-TRIGGER_WORDS = [
-    "problem", "issue", "struggling", "hardest", "hate", "wish", 
-    "alternative", "missing", "automate", "manual", "waste", "frustrated",
-    "annoying", "pain", "looking for a tool"
-]
-TRIGGER_REGEX = re.compile(r"\b(" + "|".join(TRIGGER_WORDS) + r")\b", re.IGNORECASE)
-
-def fetch_reddit_posts():
+def fetch_hn_problems():
+    """Hacker News Ask HN threads about tools, struggles, and unmet needs."""
+    queries = [
+        "Ask HN: What is your biggest pain point",
+        "Ask HN: What software do you wish existed",
+        "Ask HN: frustrating tool",
+        "Ask HN: struggle with",
+    ]
     extracted = []
-    for sub in SUBREDDITS:
-        # Fetch top posts from the past month for much higher quality signals
-        url = f"https://www.reddit.com/r/{sub}/top.json?t=month&limit=50"
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    
+    for query in queries:
+        encoded_query = urllib.parse.quote(query)
+        url = f"https://hn.algolia.com/api/v1/search?query={encoded_query}&tags=story&hitsPerPage=20"
+        
         try:
+            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
             with urllib.request.urlopen(req, timeout=10) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
-                posts = data.get("data", {}).get("children", [])
-                for p in posts:
-                    post = p["data"]
-                    title = post.get("title", "")
-                    selftext = post.get("selftext", "")
-                    full_text = f"{title}\n{selftext}"
-
-                    # Exclude mod posts or empty bodies
-                    if post.get("stickied") or len(full_text.strip()) < 40:
-                        continue
-
-                    if TRIGGER_REGEX.search(full_text):
+                for hit in data.get("hits", []):
+                    title = hit.get("title") or ""
+                    text = hit.get("story_text") or ""
+                    
+                    if len(title) > 15:
                         extracted.append({
-                            "id": f"reddit_{post.get('id')}",
-                            "source": f"r/{sub}",
+                            "id": f"hn_{hit.get('objectID')}",
+                            "source": "Hacker News",
                             "title": title,
-                            "body": selftext[:1200],
-                            "upvotes": post.get("ups", 0),
-                            "comments": post.get("num_comments", 0),
-                            "url": f"https://reddit.com{post.get('permalink')}",
+                            "body": (text or title)[:1000],
+                            "upvotes": hit.get("points") or 1,
+                            "comments": hit.get("num_comments") or 0,
+                            "url": f"https://news.ycombinator.com/item?id={hit.get('objectID')}",
                         })
         except Exception as e:
-            print(f"Error fetching r/{sub}: {e}")
+            print(f"Error fetching HN query '{query}': {e}")
+            
     return extracted
 
-def fetch_hn_posts():
-    import time
-    month_ago = int(time.time()) - (30 * 86400)
-    # Search Ask HN posts discussing tools and frustrations
-    url = f"https://hn.algolia.com/api/v1/search?query=Ask%20HN%20problem%20OR%20struggle%20OR%20%22pain%20point%22&tags=story&numericFilters=created_at_i>{month_ago}"
+def fetch_devto_complaints():
+    """Dev.to articles discussing developer tool headaches and problems."""
+    url = "https://dev.to/api/articles?tag=productivity&top=30"
     extracted = []
     try:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            for hit in data.get("hits", []):
-                title = hit.get("title", "")
-                text = hit.get("story_text") or ""
-                extracted.append({
-                    "id": f"hn_{hit.get('objectID')}",
-                    "source": "Hacker News",
-                    "title": title,
-                    "body": text[:1200],
-                    "upvotes": hit.get("points", 0),
-                    "comments": hit.get("num_comments", 0),
-                    "url": f"https://news.ycombinator.com/item?id={hit.get('objectID')}",
-                })
+            for article in data:
+                title = article.get("title", "")
+                desc = article.get("description", "")
+                if any(w in (title + desc).lower() for w in ["hate", "problem", "hardest", "struggle", "why", "waste"]):
+                    extracted.append({
+                        "id": f"devto_{article.get('id')}",
+                        "source": "Dev.to",
+                        "title": title,
+                        "body": desc[:1000],
+                        "upvotes": article.get("positive_reactions_count", 1),
+                        "comments": article.get("comments_count", 0),
+                        "url": article.get("url"),
+                    })
     except Exception as e:
-        print(f"Error fetching Hacker News: {e}")
+        print(f"Error fetching Dev.to: {e}")
     return extracted
 
 if __name__ == "__main__":
-    raw_posts = fetch_reddit_posts() + fetch_hn_posts()
-    print(f"Found {len(raw_posts)} candidate complaint posts.")
+    posts = fetch_hn_problems() + fetch_devto_complaints()
+    print(f"Successfully collected {len(posts)} candidate problem posts.")
+    
     os.makedirs("data", exist_ok=True)
     with open("data/raw_posts.json", "w") as f:
-        json.dump(raw_posts, f, indent=2)
+        json.dump(posts, f, indent=2)
