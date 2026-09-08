@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProblemRadar — What to Build Next</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+  
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs px-3 py-1 rounded-full font-medium uppercase tracking-wider">Zero-Cost Discovery</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mt-4 tracking-tight">Stop Guessing What to Build</h1>
+      <p class="text-slate-400 mt-3 text-lg max-w-xl mx-auto">Real complaints, pain points, and product requests mined straight from Reddit & Hacker News.</p>
+      
+      <!-- Filter Bar -->
+      <div class="mt-8 flex flex-wrap gap-2 justify-center" id="categoryFilters">
+        <button class="filter-btn active bg-slate-800 hover:bg-slate-700 px-4 py-1.5 rounded-lg text-sm border border-slate-700 font-medium" data-cat="All">All Categories</button>
+      </div>
+    </div>
+
+    <!-- Problems List -->
+    <div id="problemsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="text-center col-span-2 text-slate-500 py-12">Loading opportunities...</div>
+    </div>
+  </div>
+
+  <script>
+    let problems = [];
+
+    async function loadData() {
+      try {
+        const res = await fetch('./data/problems.json');
+        problems = await res.json();
+        renderCategories();
+        renderCards(problems);
+      } catch (err) {
+        document.getElementById('problemsGrid').innerHTML = `
+          <div class="col-span-2 text-center text-amber-400 p-8 border border-amber-500/30 rounded-xl bg-amber-500/10">
+            No data generated yet. Run the workflow or verify <code>data/problems.json</code> exists!
+          </div>`;
+      }
+    }
+
+    function renderCategories() {
+      const cats = ["All", ...new Set(problems.map(p => p.category).filter(Boolean))];
+      const container = document.getElementById('categoryFilters');
+      container.innerHTML = cats.map(cat => `
+        <button onclick="filterCat('${cat}')" class="filter-btn text-xs sm:text-sm px-3.5 py-1.5 rounded-lg border border-slate-800 bg-slate-900/60 hover:border-slate-700 text-slate-300 font-medium transition">
+          ${cat}
+        </button>
+      `).join('');
+    }
+
+    function filterCat(cat) {
+      if (cat === 'All') return renderCards(problems);
+      renderCards(problems.filter(p => p.category === cat));
+    }
+
+    function renderCards(list) {
+      const grid = document.getElementById('problemsGrid');
+      if (!list.length) {
+        grid.innerHTML = `<div class="col-span-2 text-center text-slate-500 py-12">No problems found under this category.</div>`;
+        return;
+      }
+      grid.innerHTML = list.map(item => `
+        <div class="bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
+              <span class="bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded font-mono">${item.category || 'General'}</span>
+              <span>Difficulty: <b class="text-slate-200">${item.difficulty || 'Medium'}</b></span>
+            </div>
+            <h2 class="text-xl font-bold text-white mb-2 leading-snug">${item.title}</h2>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">${item.description}</p>
+          </div>
+          <div>
+            <div class="text-xs text-slate-500 mb-3">Target: <span class="text-slate-300 font-medium">${item.audience || 'Builders'}</span></div>
+            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+              <span class="text-slate-500">From ${item.source} (${item.upvotes} ▲)</span>
+              <a href="${item.url}" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1">
+                View Source thread &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
