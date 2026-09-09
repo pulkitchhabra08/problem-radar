@@ -1,5 +1,17 @@
 [
   {
+    "id": "hn_36955976",
+    "title": "Fragmented ops and integration complexity with multiple payment processors",
+    "description": "Integrating both Stripe and PayPal requires duplicate integration work and inconsistent checkout user experiences. Managing separate dashboards for analytics, refunds, and chargebacks across multiple processors creates significant operational overhead.",
+    "audience": "Developers and SaaS/E-commerce Business Owners",
+    "category": "Developer Tools",
+    "difficulty": "Hard",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=36955976",
+    "upvotes": 21,
+    "comments": 2
+  },
+  {
     "id": "hn_43337754",
     "title": "Fragmented vulnerability tracking across pen tests and scanners",
     "description": "Security teams struggle to consolidate and standardize vulnerability data coming from disparate penetration tests and security scanners. Without a unified dashboard, managing remediation workflows and maintaining asset visibility across an organization becomes fragmented and overwhelming.",
