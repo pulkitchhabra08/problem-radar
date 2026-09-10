@@ -1,5 +1,41 @@
 [
   {
+    "id": "hn_37928511",
+    "title": "Complex desktop app packaging, code signing, and updates",
+    "description": "Developers shipping desktop applications face significant friction setting up multi-platform CI/CD pipelines, managing OS-specific code signing and notarization, and implementing seamless auto-updates. These administrative tasks add massive technical overhead and cost to desktop app release cycles.",
+    "audience": "Desktop App Developers, Software Engineers, DevOps Engineers",
+    "category": "Developer Tools",
+    "difficulty": "Hard",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=37928511",
+    "upvotes": 3,
+    "comments": 1
+  },
+  {
+    "id": "hn_21339239",
+    "title": "Authentication setup overhead when launching new SaaS projects",
+    "description": "Developers repeatedly struggle with setting up authentication and user management when launching new side projects or SaaS products. Re-implementing auth flows wastes valuable development time that could be spent on core features. Existing solutions can be overly complex or cumbersome to integrate quickly.",
+    "audience": "Software Developers, Indie Hackers, SaaS Founders",
+    "category": "Developer Tools",
+    "difficulty": "Medium",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=21339239",
+    "upvotes": 59,
+    "comments": 27
+  },
+  {
+    "id": "hn_36149904",
+    "title": "Inaccurate and inconsistent IT asset inventory across security tools",
+    "description": "Cybersecurity blue teams struggle to maintain an accurate, unified inventory of all devices on their networks. Existing software solutions report conflicting asset counts and lack comprehensive, network-scale visibility, making incident response and patch management unreliable.",
+    "audience": "Cybersecurity professionals, Blue Teams, and Enterprise IT Administrators",
+    "category": "Operations",
+    "difficulty": "Hard",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=36149904",
+    "upvotes": 42,
+    "comments": 42
+  },
+  {
     "id": "hn_36955976",
     "title": "Fragmented ops and integration complexity with multiple payment processors",
     "description": "Integrating both Stripe and PayPal requires duplicate integration work and inconsistent checkout user experiences. Managing separate dashboards for analytics, refunds, and chargebacks across multiple processors creates significant operational overhead.",
