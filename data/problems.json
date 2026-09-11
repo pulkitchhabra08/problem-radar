@@ -1,5 +1,17 @@
 [
   {
+    "id": "hn_44125014",
+    "title": "Overly complex and expensive social media schedulers for startups",
+    "description": "Existing social media management tools like Hootsuite and Buffer are tailored for large agencies, resulting in bloated interfaces and high subscription costs. Solo founders and bootstrapped startups struggle to find lightweight, affordable tools for simple cross-platform posting and basic analytics.",
+    "audience": "Solopreneurs, solo founders, and bootstrapped startups",
+    "category": "Marketing",
+    "difficulty": "Medium",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=44125014",
+    "upvotes": 1,
+    "comments": 1
+  },
+  {
     "id": "hn_37928511",
     "title": "Complex desktop app packaging, code signing, and updates",
     "description": "Developers shipping desktop applications face significant friction setting up multi-platform CI/CD pipelines, managing OS-specific code signing and notarization, and implementing seamless auto-updates. These administrative tasks add massive technical overhead and cost to desktop app release cycles.",
