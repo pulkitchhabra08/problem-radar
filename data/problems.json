@@ -1,5 +1,17 @@
 [
   {
+    "id": "hn_49689454",
+    "title": "Scaling and Orchestrating Large Multi-Agent Swarms in Production",
+    "description": "Engineering teams attempting to scale multi-agent AI architectures encounter major operational hurdles including state synchronization, cascading failures, high latency, and excessive token costs. There is also a lack of tools and benchmarks to determine whether complex multi-agent swarms are justified over simpler LLM setups.",
+    "audience": "AI Engineers, Systems Architects, and LLM Developers",
+    "category": "Developer Tools",
+    "difficulty": "Hard",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=49689454",
+    "upvotes": 2,
+    "comments": 1
+  },
+  {
     "id": "hn_44125014",
     "title": "Overly complex and expensive social media schedulers for startups",
     "description": "Existing social media management tools like Hootsuite and Buffer are tailored for large agencies, resulting in bloated interfaces and high subscription costs. Solo founders and bootstrapped startups struggle to find lightweight, affordable tools for simple cross-platform posting and basic analytics.",
