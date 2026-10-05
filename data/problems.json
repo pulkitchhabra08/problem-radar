@@ -1,5 +1,17 @@
 [
   {
+    "id": "hn_39619009",
+    "title": "Lack of modern Cargo-like package managers for Lisp",
+    "description": "Lisp and Scheme developers struggle with traditional build systems that rely on global package installations and manual project setups. They want a modern developer toolchain with project-local dependency management and standardized CLI workflows similar to Rust's Cargo or NPM.",
+    "audience": "Lisp and Scheme Developers",
+    "category": "Developer Tools",
+    "difficulty": "Medium",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=39619009",
+    "upvotes": 3,
+    "comments": 4
+  },
+  {
     "id": "hn_49689454",
     "title": "Scaling and Orchestrating Large Multi-Agent Swarms in Production",
     "description": "Engineering teams attempting to scale multi-agent AI architectures encounter major operational hurdles including state synchronization, cascading failures, high latency, and excessive token costs. There is also a lack of tools and benchmarks to determine whether complex multi-agent swarms are justified over simpler LLM setups.",
