@@ -1,5 +1,17 @@
 [
   {
+    "id": "hn_44447389",
+    "title": "Data Curation and Cleaning for AI Model Training",
+    "description": "Preparing datasets for training or fine-tuning AI models requires excessive manual effort to filter noise, ensure data diversity, and balance volume. Machine learning practitioners struggle with the lack of streamlined, automated tools for high-quality dataset preparation.",
+    "audience": "AI/ML Engineers, Data Scientists, and Developers",
+    "category": "AI/Automation",
+    "difficulty": "Medium",
+    "source": "Hacker News",
+    "url": "https://news.ycombinator.com/item?id=44447389",
+    "upvotes": 2,
+    "comments": 0
+  },
+  {
     "id": "hn_39619009",
     "title": "Lack of modern Cargo-like package managers for Lisp",
     "description": "Lisp and Scheme developers struggle with traditional build systems that rely on global package installations and manual project setups. They want a modern developer toolchain with project-local dependency management and standardized CLI workflows similar to Rust's Cargo or NPM.",
